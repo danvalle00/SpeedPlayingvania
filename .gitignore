@@ -8,7 +8,9 @@
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
-
+.idea/**/indexLayout.xml
+.idea/**/vcs.xml
+.idea/**/projectSettingsUpdater.xml
 # AWS User-specific
 .idea/**/aws.xml
 
@@ -167,4 +169,4 @@ sysinfo.txt
 # Ignore all local history of files
 .history
 .ionide
-.idea
+.idea/
