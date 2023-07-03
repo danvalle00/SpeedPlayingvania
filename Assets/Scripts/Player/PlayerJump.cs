@@ -7,39 +7,31 @@ public class PlayerJump : MonoBehaviour
     // components
     private Rigidbody2D _playerRigid;
     private PlayerChecks _playerChecks;
-
     private Vector2 _velocity;
-    private float _jumpSpeed;
+
 
     // stats and options
     [SerializeField] private float jumpHeight;
-    [SerializeField] private int maxAirJumps;
-    [SerializeField] private bool variableJumpHeight;
-    [SerializeField] private float timeToJumpApex;
+    [SerializeField, Range(0, 5)] private int maxAirJumps;
+    [SerializeField, Range(0f, 0.3f)] private float coyoteTime;
     
     // gravity stats
     [SerializeField] private float upwardMovementMultiplier;
     [SerializeField] private float downwardMovementMultiplier;
-    [SerializeField] private float jumpCutOff;
-    [SerializeField] private float maxSpeedFall;
-    private float _gravMultiplier;
-
-    private float _defaultGravityScale;
-
-
-    // state
-    [SerializeField] private bool canJumpAgain;
-    private bool _desiredJump;
-    private bool _pressingJump;
-    private bool _currentlyJumping;
-    [SerializeField] private bool groundCheck;
-
-    // private float multipleJumpCounter;
-    private void Start()
+     
+    
+    // calculations
+    private float _jumpSpeed, _defaultGravityScale, _coyoteCounter;
+    private int _jumpPhase;
+    private bool _pressingJump, _groundCheck, _desiredJump, _isJumping, _isJumpReset;
+    
+    
+    private void Awake()
     {
         _playerChecks = GetComponent<PlayerChecks>();
         _playerRigid = GetComponent<Rigidbody2D>();
         _defaultGravityScale = 1f;
+        _isJumpReset = true;
 
     }
 
@@ -58,78 +50,71 @@ public class PlayerJump : MonoBehaviour
         }
     }
 
+    
     private void FixedUpdate()
     {
-        SetPhysics();
-        groundCheck = _playerChecks.GetGroundCheck();
+        _groundCheck = _playerChecks.GetGroundCheck();
         _velocity = _playerRigid.velocity;
-        if (_desiredJump)
-        {
-            DoAJump();
-            _playerRigid.velocity = _velocity;
-            return;
-        }
-        
-        CalculateGravity();
-    }
-    
-    private void SetPhysics()
-    {
-        var newGravity = new Vector2(0, -2f * jumpHeight / (timeToJumpApex * timeToJumpApex));
-        _playerRigid.gravityScale = newGravity.y / Physics2D.gravity.y * _gravMultiplier;
-    }
-    
-    private void CalculateGravity() // this can be refactored if i decided the numbers for theses upward/downward multipliers be zero
-    {
-        if (_playerRigid.velocity.y > 0.01f)
-        {
-            if (groundCheck)
-            {
-                _gravMultiplier = _defaultGravityScale;
-            }
-            else
-            {
-                if (variableJumpHeight)
-                {
-                    if (_pressingJump && _currentlyJumping)
-                    {
-                        _gravMultiplier = upwardMovementMultiplier;
-                    }
-                    else
-                    {
-                        _gravMultiplier = jumpCutOff;
-                    }
-                }
-                else
-                {
-                    _gravMultiplier = _defaultGravityScale;
-                }
-            }
 
-        }
-        else if (_playerRigid.velocity.y < -0.01f)
+        if (_groundCheck && _playerRigid.velocity.y == 0)
         {
-            _gravMultiplier = groundCheck ? _defaultGravityScale : downwardMovementMultiplier;
+            _jumpPhase = 0;
+            _coyoteCounter = coyoteTime;
+            _isJumping = false;
+
         }
         else
         {
-            if (groundCheck)
-            {
-                _gravMultiplier = _defaultGravityScale;
-            }
+            _coyoteCounter -= Time.deltaTime;
         }
         
-        _playerRigid.velocity = new Vector3(_velocity.x, Mathf.Clamp(_velocity.y, -maxSpeedFall, 100));
+        if (_desiredJump && _isJumpReset)
+        {
+            _isJumpReset = false;
+            _desiredJump = false;
+            DoAJump();
+        }
+        else if (!_desiredJump)
+        {
+            _isJumpReset = true;
+        }
+        CalculateGravity();
+        _playerRigid.velocity = _velocity;
     }
+    
+    private void CalculateGravity()
+    {
+        if (_pressingJump && _playerRigid.velocity.y > 0f)
+        {
+            _playerRigid.gravityScale = upwardMovementMultiplier;
+        }
+        else if (!_pressingJump || _playerRigid.velocity.y < 0f)
+        {
+            _playerRigid.gravityScale = downwardMovementMultiplier;
+        }
+        else if (_playerRigid.velocity.y == 0)
+        {
+            _playerRigid.gravityScale = _defaultGravityScale;
+        }
+    }
+        
+        
+        
     
     private void DoAJump()
     {
-        if (groundCheck || canJumpAgain)
+        if (_coyoteCounter > 0f || (_jumpPhase < maxAirJumps && _isJumping))        
         {
-            _desiredJump = false;
-            canJumpAgain = (maxAirJumps == 1 && canJumpAgain == false);
-
-            _jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * _playerRigid.gravityScale * jumpHeight);
+            if (_isJumping)
+            {
+                _jumpPhase += 1;
+            }
+            _coyoteCounter = 0;
+             
+                
+            _jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * jumpHeight);
+            _isJumping = true;
+            
             // second jump speed calculations, here you can tweaks the numbers later for a lower jump height when doing
             // the second jump (hollow knight: first jump= 4x character, second jump 2x character more or less)
             // This will ensure the jump is the exact same strength, no matter your velocity.
@@ -143,7 +128,8 @@ public class PlayerJump : MonoBehaviour
             }
             
             _velocity.y += _jumpSpeed;
-            _currentlyJumping = true;
+            
         }
     }
 }
+            

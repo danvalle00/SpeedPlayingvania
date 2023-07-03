@@ -27,7 +27,7 @@ public class PlayerHorizontal : MonoBehaviour
     [SerializeField] private bool pressingKey;
     [SerializeField] private bool groundCheck;
     [SerializeField] private bool useAcceleration;
-    private void Start()
+    private void Awake()
     {
         _playerChecks = GetComponent<PlayerChecks>();
         _playerRigid = GetComponent<Rigidbody2D>();
@@ -56,9 +56,9 @@ public class PlayerHorizontal : MonoBehaviour
     private void FixedUpdate()
     {
         groundCheck = _playerChecks.GetGroundCheck();
-        
-        
         _velocity = _playerRigid.velocity;
+        
+        
         if (useAcceleration)
         {
             RunWithAcceleration();
@@ -89,7 +89,7 @@ public class PlayerHorizontal : MonoBehaviour
     {
         // tweak this numbers in the inspector;
         _acceleration = groundCheck ? maxAcceleration : maxAirAcceleration;
-        _turnSpeed = groundCheck ? _turnSpeed : maxAirTurnSpeed;
+        _turnSpeed = groundCheck ? maxTurnSpeed : maxAirTurnSpeed;
         _deceleration = groundCheck ? maxDeceleration : maxAirDeceleration;
 
         if (pressingKey)
