@@ -10,7 +10,7 @@ public class PlayerJump : MonoBehaviour
     private Vector2 _velocity;
 
 
-    // stats and options
+    // stats and options TODO: implement the character stats in the scriptable object
     [SerializeField] private float jumpHeight;
     [SerializeField] private int maxAirJumps;
     [SerializeField, Range(0f, 0.3f)] private float coyoteTime;
@@ -110,7 +110,7 @@ public class PlayerJump : MonoBehaviour
             _coyoteCounter = 0;
              
                 
-            _jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * jumpHeight);
+            _jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * jumpHeight * upwardMovementMultiplier);
             _isJumping = true;
             
             // second jump speed calculations, here you can tweaks the numbers later for a lower jump height when doing

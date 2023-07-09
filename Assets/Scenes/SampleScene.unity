@@ -1422,11 +1422,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1a9c094270f5f44e97a0895d2113216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 12
+  jumpHeight: 5
   maxAirJumps: 1
   coyoteTime: 0.1
-  upwardMovementMultiplier: 3
-  downwardMovementMultiplier: 6
+  upwardMovementMultiplier: 4
+  downwardMovementMultiplier: 9
 --- !u!114 &1161415594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1440,12 +1440,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPoint: {fileID: 21080307}
-  attackRange: 0.5
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
   playerScriptable: {fileID: 11400000, guid: 1236e24af8a9b5d47be80f6376b37bc8, type: 2}
-  pressAttack: 0
+  attackRange: 0.5
+  attackRate: 2
 --- !u!1 &1274667682
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,8 +6,9 @@ public class PlayerHorizontal : MonoBehaviour
     private Rigidbody2D _playerRigid;
     private PlayerChecks _playerChecks;
 
-    // stats
+    // stats  TODO: implement the character stats in the scriptable object
     [SerializeField] private float maxSpeed;
+    // in this game acceleration works only midair, on ground the player doesnt have acceleration;
     [SerializeField] private float maxAcceleration;
     [SerializeField] private float maxDeceleration;
     [SerializeField] private float maxTurnSpeed;
@@ -24,9 +25,9 @@ public class PlayerHorizontal : MonoBehaviour
     private float _deceleration;
     private float _maxSpeedChange;
     
-    [SerializeField] private bool pressingKey;
-    [SerializeField] private bool groundCheck;
-    [SerializeField] private bool useAcceleration;
+    private bool _pressingKey;
+    private bool _groundCheck;
+    private bool _useAcceleration;
     private void Awake()
     {
         _playerChecks = GetComponent<PlayerChecks>();
@@ -42,11 +43,11 @@ public class PlayerHorizontal : MonoBehaviour
         if (_directionX != 0)
         {
             transform.localScale = new Vector3(_directionX > 0 ? 1 : -1, 1, 1);
-            pressingKey = true;
+            _pressingKey = true;
         }
         else
         {
-            pressingKey = false;
+            _pressingKey = false;
         }
             
         
@@ -55,17 +56,17 @@ public class PlayerHorizontal : MonoBehaviour
 
     private void FixedUpdate()
     {
-        groundCheck = _playerChecks.GetGroundCheck();
+        _groundCheck = _playerChecks.GetGroundCheck();
         _velocity = _playerRigid.velocity;
         
         
-        if (useAcceleration)
+        if (_useAcceleration)
         {
             RunWithAcceleration();
         }
         else
         {
-            if (groundCheck)
+            if (_groundCheck)
             {
                 Run();
             }
@@ -88,11 +89,11 @@ public class PlayerHorizontal : MonoBehaviour
     private void RunWithAcceleration()
     {
         // tweak this numbers in the inspector;
-        _acceleration = groundCheck ? maxAcceleration : maxAirAcceleration;
-        _turnSpeed = groundCheck ? maxTurnSpeed : maxAirTurnSpeed;
-        _deceleration = groundCheck ? maxDeceleration : maxAirDeceleration;
+        _acceleration = _groundCheck ? maxAcceleration : maxAirAcceleration;
+        _turnSpeed = _groundCheck ? maxTurnSpeed : maxAirTurnSpeed;
+        _deceleration = _groundCheck ? maxDeceleration : maxAirDeceleration;
 
-        if (pressingKey)
+        if (_pressingKey)
         {
             if (Mathf.Sign(_directionX) != Mathf.Sign(_velocity.x))
             {

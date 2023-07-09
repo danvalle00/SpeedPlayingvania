@@ -10,6 +10,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private PlayerScriptable playerScriptable;
     
+    // TODO: implement the character stats in the scriptable object
     [SerializeField] private float attackRange;
     [SerializeField] private float attackRate;
     private float _nextAttackTime;
