@@ -12,7 +12,7 @@ public class PlayerJump : MonoBehaviour
 
     // stats and options
     [SerializeField] private float jumpHeight;
-    [SerializeField, Range(0, 5)] private int maxAirJumps;
+    [SerializeField] private int maxAirJumps;
     [SerializeField, Range(0f, 0.3f)] private float coyoteTime;
     
     // gravity stats
@@ -42,8 +42,6 @@ public class PlayerJump : MonoBehaviour
             _desiredJump = true;
             _pressingJump = true;
         }
-
-
         if (context.canceled)
         {
             _pressingJump = false;
@@ -128,8 +126,8 @@ public class PlayerJump : MonoBehaviour
             }
             
             _velocity.y += _jumpSpeed;
-            
         }
     }
 }
+            
             

@@ -1,0 +1,41 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "Experimental/Fase_1_experimental.tmx",
+    "expandedProjectPaths": [
+        ".",
+        "Experimental"
+    ],
+    "fileStates": {
+        "Experimental/Fase_1_experimental.tmx": {
+            "scale": 3,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 210.33333333333331,
+                "y": 109
+            }
+        },
+        "Experimental/untitled.tmx": {
+            "scale": 1.6367708333333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": -61.401387386240714,
+                "y": 249.88226309425318
+            }
+        }
+    },
+    "last.imagePath": "C:/Program Files/Tiled/examples",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "openFiles": [
+        "Experimental/Fase_1_experimental.tmx"
+    ],
+    "project": "TiledProject.tiled-project",
+    "recentFiles": [
+        "Experimental/Fase_1_experimental.tmx",
+        "Experimental/untitled.tmx"
+    ]
+}
