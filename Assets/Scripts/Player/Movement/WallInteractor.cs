@@ -4,15 +4,11 @@ using UnityEngine.InputSystem;
 
 
 public class WallInteractor : MonoBehaviour
-{
+{ 
     private bool WallJumping { get; set; }
     
-    // stats TODO: implement the character stats in the scriptable object
-    [SerializeField, Range(0.1f, 5f)] private float wallSlideMaxSpeed;
-    [SerializeField] private Vector2 wallJumpClimb = new(4f, 12f);
-    [SerializeField] private Vector2 wallJumpBounce = new(10.7f, 10f);
-    [SerializeField] private Vector2 wallJumpLeap = new(14f, 12f);
-    [SerializeField, Range(0.05f, 0.5f)] private float wallJumpStickTime;
+    // Stats from Scriptable Object
+    [SerializeField] private PlayerScriptable playerScriptable;
     
     // calculations
     private PlayerChecks _playerChecks;
@@ -54,9 +50,9 @@ public class WallInteractor : MonoBehaviour
         
         if (_onWall)
         {
-            if (_velocity.y < -wallSlideMaxSpeed)
+            if (_velocity.y < -playerScriptable.wallSlideMaxSpeed)
             {
-                _velocity.y = -wallSlideMaxSpeed;
+                _velocity.y = -playerScriptable.wallSlideMaxSpeed;
             }
         }
         #endregion
@@ -74,12 +70,12 @@ public class WallInteractor : MonoBehaviour
                 }
                 else
                 {
-                    _wallStickCounter = wallJumpStickTime;
+                    _wallStickCounter = playerScriptable.wallJumpStickTime;
                 }
             }
             else
             {
-                _wallStickCounter = wallJumpStickTime;
+                _wallStickCounter = playerScriptable.wallJumpStickTime;
             }
         }
         
@@ -96,19 +92,19 @@ public class WallInteractor : MonoBehaviour
         {
             if (Mathf.Sign(-_wallDirectionX) == MathF.Sign(_directionX))
             {
-                _velocity = new Vector2(wallJumpClimb.x * _wallDirectionX, wallJumpClimb.y);
+                _velocity = new Vector2(playerScriptable.wallJumpClimb.x * _wallDirectionX, playerScriptable.wallJumpClimb.y);
                 WallJumping = true;
                 _desiredJump = false;
             }
             else if (_directionX == 0)
             {
-                _velocity = new Vector2(wallJumpBounce.x * _wallDirectionX, wallJumpBounce.y);
+                _velocity = new Vector2(playerScriptable.wallJumpBounce.x * _wallDirectionX, playerScriptable.wallJumpBounce.y);
                 WallJumping = true;
                 _desiredJump = false;
             }
             else
             {
-                _velocity = new Vector2(wallJumpLeap.x * _wallDirectionX, wallJumpLeap.y);
+                _velocity = new Vector2(playerScriptable.wallJumpLeap.x * _wallDirectionX, playerScriptable.wallJumpLeap.y);
                 WallJumping = true;
                 _desiredJump = false;
             }

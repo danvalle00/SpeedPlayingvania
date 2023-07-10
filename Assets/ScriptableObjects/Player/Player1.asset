@@ -12,7 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2204ae5655ade4c93a7d3b7e7bf1ca, type: 3}
   m_Name: Player1
   m_EditorClassIdentifier: 
-  health: 0
-  resource: 0
+  maxSpeed: 8
+  maxAirAcceleration: 52
+  maxAirDeceleration: 52
+  maxAirTurnSpeed: 80
+  jumpHeight: 5
+  maxAirJumps: 0
+  coyoteTime: 0.1
+  upwardMovementMultiplier: 4
+  downwardMovementMultiplier: 9
+  health: 100
+  resource: 5
   attackDamage: 20
-  doubleJump: 0
+  attackRange: 0.5
+  attackRate: 2

@@ -8,17 +8,9 @@ public class PlayerJump : MonoBehaviour
     private Rigidbody2D _playerRigid;
     private PlayerChecks _playerChecks;
     private Vector2 _velocity;
-
-
-    // stats and options TODO: implement the character stats in the scriptable object
-    [SerializeField] private float jumpHeight;
-    [SerializeField] private int maxAirJumps;
-    [SerializeField, Range(0f, 0.3f)] private float coyoteTime;
     
-    // gravity stats
-    [SerializeField] private float upwardMovementMultiplier;
-    [SerializeField] private float downwardMovementMultiplier;
-     
+    // Stats from Scriptable Object
+    [SerializeField] private PlayerScriptable playerScriptable;
     
     // calculations
     private float _jumpSpeed, _defaultGravityScale, _coyoteCounter;
@@ -57,7 +49,7 @@ public class PlayerJump : MonoBehaviour
         if (_groundCheck && _playerRigid.velocity.y == 0)
         {
             _jumpPhase = 0;
-            _coyoteCounter = coyoteTime;
+            _coyoteCounter = playerScriptable.coyoteTime;
             _isJumping = false;
 
         }
@@ -84,11 +76,11 @@ public class PlayerJump : MonoBehaviour
     {
         if (_pressingJump && _playerRigid.velocity.y > 0f)
         {
-            _playerRigid.gravityScale = upwardMovementMultiplier;
+            _playerRigid.gravityScale = playerScriptable.upwardMovementMultiplier;
         }
         else if (!_pressingJump || _playerRigid.velocity.y < 0f)
         {
-            _playerRigid.gravityScale = downwardMovementMultiplier;
+            _playerRigid.gravityScale = playerScriptable.downwardMovementMultiplier;
         }
         else if (_playerRigid.velocity.y == 0)
         {
@@ -101,16 +93,15 @@ public class PlayerJump : MonoBehaviour
     
     private void DoAJump()
     {
-        if (_coyoteCounter > 0f || (_jumpPhase < maxAirJumps && _isJumping))        
+        if (_coyoteCounter > 0f || (_jumpPhase < playerScriptable.maxAirJumps && _isJumping))        
         {
             if (_isJumping)
             {
                 _jumpPhase += 1;
             }
             _coyoteCounter = 0;
-             
-                
-            _jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * jumpHeight * upwardMovementMultiplier);
+            
+            _jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * playerScriptable.jumpHeight * playerScriptable.upwardMovementMultiplier);
             _isJumping = true;
             
             // second jump speed calculations, here you can tweaks the numbers later for a lower jump height when doing

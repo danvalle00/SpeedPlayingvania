@@ -1,18 +1,15 @@
-
 using UnityEngine;
 using UnityEngine.InputSystem;
-
 
 public class PlayerCombat : MonoBehaviour
 {
     
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask enemyLayer;
-    [SerializeField] private PlayerScriptable playerScriptable;
     
-    // TODO: implement the character stats in the scriptable object
-    [SerializeField] private float attackRange;
-    [SerializeField] private float attackRate;
+    // Stats from Scriptable Object
+    [SerializeField] private PlayerScriptable playerScriptable;
+
     private float _nextAttackTime;
     private bool _pressAttack;
 
@@ -32,7 +29,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 _pressAttack = false;
                 Attack();
-                _nextAttackTime = Time.time + 1f / attackRate;
+                _nextAttackTime = Time.time + 1f / playerScriptable.attackRate;
             }
         }
             
@@ -41,9 +38,8 @@ public class PlayerCombat : MonoBehaviour
     private void Attack()
     {
         // animator shit (attack)
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
-        
-        foreach (Collider2D enemy in hitEnemies)
+        var hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, playerScriptable.attackRange, enemyLayer);
+        foreach (var enemy in hitEnemies)
         {
             enemy.GetComponent<EnemyHurting>().TakeDamage(playerScriptable.attackDamage);
         }
@@ -56,7 +52,7 @@ public class PlayerCombat : MonoBehaviour
         {
             return;
         }
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        Gizmos.DrawWireSphere(attackPoint.position, playerScriptable.attackRange);
     }
 }
 

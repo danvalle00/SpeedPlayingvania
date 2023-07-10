@@ -5,16 +5,9 @@ public class PlayerHorizontal : MonoBehaviour
 {
     private Rigidbody2D _playerRigid;
     private PlayerChecks _playerChecks;
-
-    // stats  TODO: implement the character stats in the scriptable object
-    [SerializeField] private float maxSpeed;
-    // in this game acceleration works only midair, on ground the player doesnt have acceleration;
-    [SerializeField] private float maxAcceleration;
-    [SerializeField] private float maxDeceleration;
-    [SerializeField] private float maxTurnSpeed;
-    [SerializeField] private float maxAirAcceleration;
-    [SerializeField] private float maxAirDeceleration;
-    [SerializeField] private float maxAirTurnSpeed;
+    
+    // Stats from Scriptable Object
+    [SerializeField] private PlayerScriptable playerScriptable;
     
     // calculations
     private Vector2 _desiredVelocity;
@@ -33,11 +26,12 @@ public class PlayerHorizontal : MonoBehaviour
         _playerChecks = GetComponent<PlayerChecks>();
         _playerRigid = GetComponent<Rigidbody2D>();
     }
+        
     public void OnMovement(InputAction.CallbackContext value)
     {
         _directionX = value.ReadValue<float>();
     }
-
+    
     private void Update()
     {
         if (_directionX != 0)
@@ -49,64 +43,49 @@ public class PlayerHorizontal : MonoBehaviour
         {
             _pressingKey = false;
         }
-            
-        
-        _desiredVelocity = new Vector2(_directionX, 0f) * maxSpeed;
+
+
+        _desiredVelocity = new Vector2(_directionX, 0f) * playerScriptable.maxSpeed;
     }
 
     private void FixedUpdate()
     {
         _groundCheck = _playerChecks.GetGroundCheck();
         _velocity = _playerRigid.velocity;
-        
-        
-        if (_useAcceleration)
-        {
-            RunWithAcceleration();
+        if (_groundCheck)
+        { 
+            Run();
         }
         else
-        {
-            if (_groundCheck)
-            {
-                Run();
-            }
-            else
-            {
-                RunWithAcceleration();
-            }
+        { 
+            AccelerationAirControl();
         }
-            
     }
             
-             
-            
+    
+    
     private void Run()
     {
         _velocity.x = _desiredVelocity.x;
         _playerRigid.velocity = _velocity;
     }
 
-    private void RunWithAcceleration()
+    private void AccelerationAirControl()
     {
-        // tweak this numbers in the inspector;
-        _acceleration = _groundCheck ? maxAcceleration : maxAirAcceleration;
-        _turnSpeed = _groundCheck ? maxTurnSpeed : maxAirTurnSpeed;
-        _deceleration = _groundCheck ? maxDeceleration : maxAirDeceleration;
-
         if (_pressingKey)
         {
             if (Mathf.Sign(_directionX) != Mathf.Sign(_velocity.x))
             {
-                _maxSpeedChange = _turnSpeed * Time.deltaTime;
+                _maxSpeedChange = playerScriptable.maxAirTurnSpeed * Time.deltaTime;
             }
             else
             {
-                _maxSpeedChange = _acceleration * Time.deltaTime;
+                _maxSpeedChange = playerScriptable.maxAirAcceleration * Time.deltaTime;
             }
         }
         else
         {
-            _maxSpeedChange = _deceleration * Time.deltaTime;
+            _maxSpeedChange = playerScriptable.maxAirDeceleration * Time.deltaTime;
         }
         _velocity.x = Mathf.MoveTowards(_velocity.x, _desiredVelocity.x, _maxSpeedChange);
         _playerRigid.velocity = _velocity;
