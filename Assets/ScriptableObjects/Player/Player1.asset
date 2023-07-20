@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Player1
   m_EditorClassIdentifier: 
   maxSpeed: 8
+  dashRange: 18
+  dashTimer: 0.2
+  dashCooldown: 0.2
   maxAirAcceleration: 52
   maxAirDeceleration: 52
   maxAirTurnSpeed: 80
@@ -21,6 +24,11 @@ MonoBehaviour:
   coyoteTime: 0.1
   upwardMovementMultiplier: 4
   downwardMovementMultiplier: 9
+  wallSlideMaxSpeed: 2
+  wallJumpClimb: {x: 10, y: 20}
+  wallJumpBounce: {x: 20, y: 20}
+  wallJumpLeap: {x: 20, y: 25}
+  wallJumpStickTime: 0.25
   health: 100
   resource: 5
   attackDamage: 20

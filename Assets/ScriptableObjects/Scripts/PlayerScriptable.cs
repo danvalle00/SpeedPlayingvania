@@ -4,7 +4,11 @@ using UnityEngine;
 public class PlayerScriptable : ScriptableObject
 {
     [Header("Horizontal Movement Stats")] public float maxSpeed;
-
+    
+    [Header("Dashing Stats")] public float dashRange;
+    public float dashTimer;
+    public float dashCooldown;
+    
     [Header("AirControl Stats")] public float maxAirAcceleration;
     public float maxAirDeceleration;
     public float maxAirTurnSpeed;

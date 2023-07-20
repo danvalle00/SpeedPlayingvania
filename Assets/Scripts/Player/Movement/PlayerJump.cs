@@ -11,7 +11,7 @@ public class PlayerJump : MonoBehaviour
     
     // Stats from Scriptable Object
     [SerializeField] private PlayerScriptable playerScriptable;
-    
+    [SerializeField] private PlayerHorizontal _playerHorizontal;
     // calculations
     private float _jumpSpeed, _defaultGravityScale, _coyoteCounter;
     private int _jumpPhase;
@@ -43,6 +43,10 @@ public class PlayerJump : MonoBehaviour
     
     private void FixedUpdate()
     {
+        if (_playerHorizontal.isDashing)
+        {
+            return;
+        }
         _groundCheck = _playerChecks.GetGroundCheck();
         _velocity = _playerRigid.velocity;
 

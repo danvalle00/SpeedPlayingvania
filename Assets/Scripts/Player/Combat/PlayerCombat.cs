@@ -35,7 +35,7 @@ public class PlayerCombat : MonoBehaviour
             
     }
     
-    private void Attack()
+    private void Attack() // need refactor
     {
         // animator shit (attack)
         var hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, playerScriptable.attackRange, enemyLayer);
