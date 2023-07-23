@@ -27,11 +27,10 @@ public class PlayerScriptable : ScriptableObject
     public float wallJumpStickTime;
     
     [Header("Combat Stats")] public int health;
-    public int resource;
     public int attackDamage;
     public float attackRange;
     public float attackRate;
-
+    public float attackKnockback;
 
 
 

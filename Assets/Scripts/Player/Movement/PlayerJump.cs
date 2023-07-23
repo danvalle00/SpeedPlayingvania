@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 
 public class PlayerJump : MonoBehaviour
@@ -11,7 +12,7 @@ public class PlayerJump : MonoBehaviour
     
     // Stats from Scriptable Object
     [SerializeField] private PlayerScriptable playerScriptable;
-    [SerializeField] private PlayerHorizontal _playerHorizontal;
+    [SerializeField] private PlayerHorizontal playerHorizontal;
     // calculations
     private float _jumpSpeed, _defaultGravityScale, _coyoteCounter;
     private int _jumpPhase;
@@ -43,7 +44,7 @@ public class PlayerJump : MonoBehaviour
     
     private void FixedUpdate()
     {
-        if (_playerHorizontal.isDashing)
+        if (playerHorizontal.isDashing)
         {
             return;
         }

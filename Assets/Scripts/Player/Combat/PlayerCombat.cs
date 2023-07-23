@@ -3,16 +3,16 @@ using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
-    
+    // basic slash 
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask enemyLayer;
     
     // Stats from Scriptable Object
     [SerializeField] private PlayerScriptable playerScriptable;
-
+    // basic slash
     private float _nextAttackTime;
     private bool _pressAttack;
-
+    
     public void OnBasicSwordAttack(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -20,9 +20,10 @@ public class PlayerCombat : MonoBehaviour
             _pressAttack = true;
         }
     }
-    
+
     private void Update()
     {
+        // basic slash attack rate
         if (Time.time >= _nextAttackTime)
         {
             if (_pressAttack)
@@ -38,15 +39,14 @@ public class PlayerCombat : MonoBehaviour
     private void Attack() // need refactor
     {
         // animator shit (attack)
-        var hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, playerScriptable.attackRange, enemyLayer);
-        foreach (var enemy in hitEnemies)
+        var hitEnemy = Physics2D.OverlapCircle(attackPoint.position, playerScriptable.attackRange, enemyLayer);
+        if (hitEnemy)
         {
-            enemy.GetComponent<EnemyHurting>().TakeDamage(playerScriptable.attackDamage);
+            hitEnemy.GetComponent<EnemyHurting>().TakeDamage(playerScriptable.attackDamage);
         }
-       
     }
     
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         if (attackPoint == null)
         {

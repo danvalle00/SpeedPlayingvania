@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class PlayerHorizontal : MonoBehaviour
 {
@@ -88,8 +87,8 @@ public class PlayerHorizontal : MonoBehaviour
         _velocity = _playerRigid.velocity;
         if (_groundCheck)
         {
-            Run();
             _canDash = true;
+            Run();
         }
         else
         { 
