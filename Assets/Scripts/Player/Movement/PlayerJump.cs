@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -27,7 +28,7 @@ public class PlayerJump : MonoBehaviour
         _isJumpReset = true;
 
     }
-
+    
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -40,7 +41,6 @@ public class PlayerJump : MonoBehaviour
             _pressingJump = false;
         }
     }
-
     
     private void FixedUpdate()
     {
@@ -110,7 +110,6 @@ public class PlayerJump : MonoBehaviour
             _isJumping = true;
             
             // second jump speed calculations, here you can tweaks the numbers later for a lower jump height when doing
-            // the second jump (hollow knight: first jump= 4x character, second jump 2x character more or less)
             // This will ensure the jump is the exact same strength, no matter your velocity.
             if (_velocity.y > 0f)
             {

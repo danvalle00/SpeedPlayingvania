@@ -34,3 +34,6 @@ MonoBehaviour:
   attackRange: 0.9
   attackRate: 2
   attackKnockback: 3.5
+  doubleJumpUpgrader: 0
+  wallJumpUpgrader: 0
+  dashUpgrader: 0

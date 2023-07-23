@@ -3,13 +3,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
-    // basic slash 
+     
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask enemyLayer;
-    
-    // Stats from Scriptable Object
     [SerializeField] private PlayerScriptable playerScriptable;
-    // basic slash
+    
     private float _nextAttackTime;
     private bool _pressAttack;
     
@@ -33,7 +31,6 @@ public class PlayerCombat : MonoBehaviour
                 _nextAttackTime = Time.time + 1f / playerScriptable.attackRate;
             }
         }
-            
     }
     
     private void Attack() // need refactor

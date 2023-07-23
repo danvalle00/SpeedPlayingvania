@@ -21,9 +21,12 @@ public class PlayerScriptable : ScriptableObject
     public float downwardMovementMultiplier;
 
     [Header("Wall Jump Stats")] public float wallSlideMaxSpeed;
-    [Tooltip("X Input == WallDirection; Wall Direction")] public Vector2 wallJumpClimb;
-    [Tooltip("X Input == 0; No direction")]public Vector2 wallJumpBounce;
-    [Tooltip("X Input != WallDirection; Leaving the Wall")] public Vector2 wallJumpLeap;
+    [Tooltip("X Input == WallDirection; Wall Direction")]
+    public Vector2 wallJumpClimb;
+    [Tooltip("X Input == 0; No direction")] 
+    public Vector2 wallJumpBounce;
+    [Tooltip("X Input != WallDirection; Leaving the Wall")] 
+    public Vector2 wallJumpLeap;
     public float wallJumpStickTime;
     
     [Header("Combat Stats")] public int health;
@@ -32,7 +35,9 @@ public class PlayerScriptable : ScriptableObject
     public float attackRate;
     public float attackKnockback;
 
-
+    [Header("Upgrade Items Collected: ")] public bool doubleJumpUpgrader;
+    public bool wallJumpUpgrader;
+    public bool dashUpgrader;
 
 }
 

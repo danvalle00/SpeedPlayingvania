@@ -47,7 +47,6 @@ public class WallInteractor : MonoBehaviour
         _wallDirectionX = _playerChecks.ContactNormal.x;
         
         #region Wall Slide
-        
         if (_onWall)
         {
             if (_velocity.y < -playerScriptable.wallSlideMaxSpeed)
@@ -57,8 +56,24 @@ public class WallInteractor : MonoBehaviour
         }
         #endregion
 
-        #region Wall Stick
+        if (playerScriptable.wallJumpUpgrader)
+        {
+            WallStick();
+            WallJumps();
+        }
+        _playerRigid.velocity = _velocity;
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        _playerChecks.EvaluateCollision(other);
+        if (_playerChecks.GetWallCheck() && !_playerChecks.GetGroundCheck() && WallJumping)
+        {
+            _playerRigid.velocity = Vector2.zero;
+        }
+    }
 
+    private void WallStick()
+    {
         if (_playerChecks.GetWallCheck() && !_playerChecks.GetGroundCheck() && !WallJumping)
         {
             if (_wallStickCounter > 0)
@@ -77,12 +92,11 @@ public class WallInteractor : MonoBehaviour
             {
                 _wallStickCounter = playerScriptable.wallJumpStickTime;
             }
-        }
-        
-        #endregion
-        
-        #region Wall Jump
-
+        }   
+    }
+    
+    private void WallJumps()
+    {
         if (_onWall && _velocity.x == 0 || _onGround)
         {
             WallJumping = false;
@@ -108,18 +122,6 @@ public class WallInteractor : MonoBehaviour
                 WallJumping = true;
                 _desiredJump = false;
             }
-        }
-        
-        #endregion
-        
-        _playerRigid.velocity = _velocity;
-    }
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        _playerChecks.EvaluateCollision(other);
-        if (_playerChecks.GetWallCheck() && !_playerChecks.GetGroundCheck() && WallJumping)
-        {
-            _playerRigid.velocity = Vector2.zero;
-        }
+        }    
     }
 }

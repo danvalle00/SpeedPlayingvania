@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerHorizontal : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class PlayerHorizontal : MonoBehaviour
     // calculations
     private Vector2 _desiredVelocity;
     private Vector2 _velocity;
-    private float _directionX;
+    public float directionX;
     private float _acceleration;
     private float _turnSpeed;
     private float _deceleration;
@@ -36,7 +37,7 @@ public class PlayerHorizontal : MonoBehaviour
         
     public void OnMovement(InputAction.CallbackContext value)
     {
-        _directionX = value.ReadValue<float>();
+        directionX = value.ReadValue<float>();
     }
     public void OnDash(InputAction.CallbackContext value)
     {
@@ -57,9 +58,9 @@ public class PlayerHorizontal : MonoBehaviour
         {
             return;
         }
-        if (_directionX != 0)
+        if (directionX != 0)
         {
-            transform.localScale = new Vector3(_directionX > 0 ? 1 : -1, 1, 1);
+            transform.localScale = new Vector3(directionX > 0 ? 1 : -1, 1, 1);
             _pressingKey = true;
         }
         else
@@ -67,13 +68,13 @@ public class PlayerHorizontal : MonoBehaviour
             _pressingKey = false;
         }
         
-        if (_dashKeyPressed && _canDash)
+        if (_dashKeyPressed && _canDash && playerScriptable.dashUpgrader)
         {
             StartCoroutine(Dash());
             _dashKeyPressed = false;
         }
         
-        _desiredVelocity = new Vector2(_directionX, 0f) * playerScriptable.maxSpeed;
+        _desiredVelocity = new Vector2(directionX, 0f) * playerScriptable.maxSpeed;
     }
 
     private void FixedUpdate()
@@ -107,7 +108,7 @@ public class PlayerHorizontal : MonoBehaviour
     {
         if (_pressingKey)
         {
-            if (Mathf.Sign(_directionX) != Mathf.Sign(_velocity.x))
+            if (Mathf.Sign(directionX) != Mathf.Sign(_velocity.x))
             {
                 _maxSpeedChange = playerScriptable.maxAirTurnSpeed * Time.deltaTime;
             }
