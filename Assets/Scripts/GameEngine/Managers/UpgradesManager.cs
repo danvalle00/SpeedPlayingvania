@@ -6,6 +6,7 @@ public class UpgradesManager : MonoBehaviour
     public bool doubleJump;
     public bool wallJump;
     public bool dash;
+    public bool resetHp;
     private void Update()
     {
         switch (doubleJump)
@@ -31,6 +32,11 @@ public class UpgradesManager : MonoBehaviour
             true => true,
             false => false
         };
+
+        if (resetHp)
+        {
+            playerScriptable.health = 3;
+        }
     }
             
 }

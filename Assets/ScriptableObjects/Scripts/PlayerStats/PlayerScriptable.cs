@@ -38,6 +38,6 @@ public class PlayerScriptable : ScriptableObject
     [Header("Upgrade Items Collected: ")] public bool doubleJumpUpgrader;
     public bool wallJumpUpgrader;
     public bool dashUpgrader;
-
+    public int hpFragment;
 }
 
