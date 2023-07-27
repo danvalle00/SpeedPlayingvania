@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,12 +7,15 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private PlayerScriptable playerScriptable;
-
+    
+    private PlayerChecks _playerChecks;
     private Vector3 _originalPosition;
+    
     private float _nextAttackTime;
     private bool _pressAttack;
     private float _directionY;
-     
+    
+    private const float AttackPointY = 2f;
     public void OnBasicSwordAttack(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -30,28 +32,30 @@ public class PlayerCombat : MonoBehaviour
     private void Awake()
     {
         _originalPosition = attackPoint.localPosition;
+        _playerChecks = attackPoint.GetComponentInParent<PlayerChecks>();
     }
 
     private void Update()
     {
-        if (_directionY != 0)
+        if (_directionY > 0) 
         {
-            attackPoint.localPosition = new Vector3(0f, _directionY > 0 ? 1.5f : -1.5f, 1);
+            attackPoint.localPosition = new Vector3(0f, AttackPointY, 1);
+        }
+        else if (_directionY < 0 && !_playerChecks.GetGroundCheck())  
+        {
+            attackPoint.localPosition = new Vector3(0f, -AttackPointY, 1);
         }
         else
         {
             attackPoint.localPosition = _originalPosition;
         }
         
-        // basic slash attack rate
-        if (Time.time >= _nextAttackTime)
+        if (Time.time >= _nextAttackTime && _pressAttack)
         {
-            if (_pressAttack)
-            {
-                _pressAttack = false;
-                Attack();
-                _nextAttackTime = Time.time + 1f / playerScriptable.attackRate;
-            }
+            Debug.Log("attack!");
+            _pressAttack = false;
+            Attack();
+            _nextAttackTime = Time.time + 1f / playerScriptable.attackRate;
         }
         
     }

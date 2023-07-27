@@ -35,6 +35,7 @@ public class PlayerScriptable : ScriptableObject
     public float attackRate;
     public float attackKnockback;
 
+    
     [Header("Upgrade Items Collected: ")] public bool doubleJumpUpgrader;
     public bool wallJumpUpgrader;
     public bool dashUpgrader;

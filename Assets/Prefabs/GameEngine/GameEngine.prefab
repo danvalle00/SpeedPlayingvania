@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &388257636539375622
 Transform:
   m_ObjectHideFlags: 0
@@ -48,6 +48,7 @@ MonoBehaviour:
   doubleJump: 0
   wallJump: 0
   dash: 0
+  resetHp: 0
 --- !u!1 &3723259446029770841
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +107,7 @@ Transform:
   m_GameObject: {fileID: 4750076722149725363}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -31.6, y: 16.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -238,10 +239,14 @@ MonoBehaviour:
     m_ActionId: 5e81b70b-f8b0-46b7-9c3d-ae7f18882cd8
     m_ActionName: Player/Dash[/Keyboard/shift]
   - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5e750fbe-7ab4-461e-a93d-4cec9d01209d
+    m_ActionName: Player/SpenderAttack[/Keyboard/x]
+  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
-        m_MethodName: OnSpenderAttack
+        m_MethodName: OnVertical
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -251,8 +256,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 5e750fbe-7ab4-461e-a93d-4cec9d01209d
-    m_ActionName: Player/SpenderAttack[/Keyboard/x]
+    m_ActionId: 8bc64d58-98aa-4843-8826-9d8911ac48d5
+    m_ActionName: Player/Vertical[/Keyboard/downArrow,/Keyboard/upArrow,/Keyboard/w,/Keyboard/s]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

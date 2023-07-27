@@ -17,7 +17,8 @@ public class PlayerJump : MonoBehaviour
     // calculations
     private float _jumpSpeed, _defaultGravityScale, _coyoteCounter;
     private int _jumpPhase;
-    private bool _pressingJump, _groundCheck, _desiredJump, _isJumping, _isJumpReset;
+    private bool _pressingJump, _groundCheck, _desiredJump, _isJumpReset;
+    public bool isJumping;
     
     
     private void Awake()
@@ -55,7 +56,7 @@ public class PlayerJump : MonoBehaviour
         {
             _jumpPhase = 0;
             _coyoteCounter = playerScriptable.coyoteTime;
-            _isJumping = false;
+            isJumping = false;
 
         }
         else
@@ -98,16 +99,16 @@ public class PlayerJump : MonoBehaviour
     
     private void DoAJump()
     {
-        if (_coyoteCounter > 0f || (_jumpPhase < playerScriptable.maxAirJumps && _isJumping))        
+        if (_coyoteCounter > 0f || (_jumpPhase < playerScriptable.maxAirJumps && isJumping))        
         {
-            if (_isJumping)
+            if (isJumping)
             {
                 _jumpPhase += 1;
             }
             _coyoteCounter = 0;
             
             _jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * playerScriptable.jumpHeight * playerScriptable.upwardMovementMultiplier);
-            _isJumping = true;
+            isJumping = true;
             
             // second jump speed calculations, here you can tweaks the numbers later for a lower jump height when doing
             // This will ensure the jump is the exact same strength, no matter your velocity.
