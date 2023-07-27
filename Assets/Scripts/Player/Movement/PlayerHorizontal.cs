@@ -58,6 +58,7 @@ public class PlayerHorizontal : MonoBehaviour
         {
             return;
         }
+        
         if (directionX != 0)
         {
             transform.localScale = new Vector3(directionX > 0 ? 1 : -1, 1, 1);

@@ -42,13 +42,13 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SpenderAttack",
-                    "type": "Button",
-                    "id": "5e750fbe-7ab4-461e-a93d-4cec9d01209d",
-                    "expectedControlType": "Button",
+                    "name": "Vertical",
+                    "type": "Value",
+                    "id": "8bc64d58-98aa-4843-8826-9d8911ac48d5",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -152,15 +152,70 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "78ab0250-85c0-4e07-86de-66d3215a8576",
-                    "path": "<Keyboard>/x",
+                    "name": "Arrows",
+                    "id": "7aaaf2c4-4c33-4b7a-b46a-f52645f95914",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpenderAttack",
-                    "isComposite": false,
+                    "action": "Vertical",
+                    "isComposite": true,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "77541642-e282-4ed5-afe1-e7710d833ae0",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Vertical",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "88367372-e97c-4193-bcb8-70189734ec79",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Vertical",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "WS",
+                    "id": "8fbc150d-66bc-4119-be19-d0f990da7ef0",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Vertical",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "b2caa1cf-9e22-49f8-b46f-5e87d8af7d43",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Vertical",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "66dc77c2-f1de-449d-a000-b727e256882c",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Vertical",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
