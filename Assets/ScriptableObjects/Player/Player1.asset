@@ -29,11 +29,12 @@ MonoBehaviour:
   wallJumpBounce: {x: 20, y: 20}
   wallJumpLeap: {x: 20, y: 25}
   wallJumpStickTime: 0.25
-  health: 100
-  attackDamage: 20
+  health: 3
+  attackDamage: 1
   attackRange: 0.9
   attackRate: 2
   attackKnockback: 3.5
   doubleJumpUpgrader: 0
   wallJumpUpgrader: 0
   dashUpgrader: 0
+  hpFragment: 0
