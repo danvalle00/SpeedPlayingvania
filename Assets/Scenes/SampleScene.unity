@@ -5528,11 +5528,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 998049699485788504, guid: 1d53dbf8366bcba4099587818b57eb9a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.7
+      value: -3.501393
       objectReference: {fileID: 0}
     - target: {fileID: 998049699485788504, guid: 1d53dbf8366bcba4099587818b57eb9a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.2
+      value: -6.4454927
       objectReference: {fileID: 0}
     - target: {fileID: 998049699485788504, guid: 1d53dbf8366bcba4099587818b57eb9a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5569,6 +5569,10 @@ PrefabInstance:
     - target: {fileID: 3105986504966547852, guid: 1d53dbf8366bcba4099587818b57eb9a, type: 3}
       propertyPath: m_Name
       value: GenericEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5141805851699805093, guid: 1d53dbf8366bcba4099587818b57eb9a, type: 3}
+      propertyPath: m_BodyType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6276348973997479081, guid: 1d53dbf8366bcba4099587818b57eb9a, type: 3}
       propertyPath: playerTransform

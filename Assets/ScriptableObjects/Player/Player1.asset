@@ -20,10 +20,10 @@ MonoBehaviour:
   maxAirDeceleration: 52
   maxAirTurnSpeed: 80
   jumpHeight: 5
-  maxAirJumps: 0
+  maxAirJumps: 1
   coyoteTime: 0.1
-  upwardMovementMultiplier: 4
-  downwardMovementMultiplier: 9
+  upwardMovementMultiplier: 3
+  downwardMovementMultiplier: 6
   wallSlideMaxSpeed: 2
   wallJumpClimb: {x: 10, y: 20}
   wallJumpBounce: {x: 20, y: 20}
@@ -34,7 +34,7 @@ MonoBehaviour:
   attackRange: 0.9
   attackRate: 2
   attackKnockback: 3.5
-  doubleJumpUpgrader: 0
+  doubleJumpUpgrader: 1
   wallJumpUpgrader: 0
   dashUpgrader: 0
   hpFragment: 0

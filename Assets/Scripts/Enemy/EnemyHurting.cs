@@ -23,7 +23,7 @@ public class EnemyHurting : MonoBehaviour
     {
         _currentHealth -= attackDamage;
         // animator shit (hurt)
-        _rigidbody2D.AddForce(new Vector2(playerTransform.localScale.x * playerStats.attackKnockback, 0f), ForceMode2D.Impulse);
+        // _rigidbody2D.AddForce(new Vector2(playerTransform.localScale.x * playerStats.attackKnockback, 0f), ForceMode2D.Impulse);
         
         if (_currentHealth <= 0)
         {
