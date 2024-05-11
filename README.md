@@ -1,3 +1,5 @@
+my abandoned idea lol 
+
 # SpeedPlayingvania
 ## Overall Ideas(?)
 - Metroidvania
